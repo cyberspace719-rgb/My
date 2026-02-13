@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Gabriel</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --text-color: #4a154b;
+        }
+
+        * { box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0;
+            height: 100vh; width: 100vw;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* --- 1. LOGIN SCREEN BACKGROUND (Animated) --- */
+        #login-screen {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            /* The Moving Gradient */
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #a18cd1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease-out, visibility 1s;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- 2. MAIN BACKGROUND (Ethereal & Static) --- */
+        #main-bg {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            /* Soft, dreamy colors for reading */
+            background: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        /* --- LOGIN CARD --- */
+        .login-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 45px 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            text-align: center;
+            width: 85%; max-width: 340px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            background: -webkit-linear-gradient(#e66465, #9198e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem; margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%; padding: 15px; margin: 25px 0;
+            border: 2px solid transparent; border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem; text-align: center; outline: none;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: #ff9a9e; box-shadow: 0 5px 20px rgba(255, 154, 158, 0.3); }
+
+        .btn-main {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: #fff; border: none;
+            padding: 15px 50px; border-radius: 50px;
+            font-size: 1.1rem; font-weight: 600;
+            cursor: pointer; letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(255, 154, 158, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn-main:active { transform: scale(0.96); box-shadow: 0 5px 10px rgba(255, 154, 158, 0.4); }
+
+        /* --- SURPRISE CONTENT CARD --- */
+        #surprise-content {
+            display: none; position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; max-width: 550px;
+            max-height: 85vh;
+            
+            /* Professional Glass Effect */
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            
+            padding: 40px 30px;
+            border-radius: 30px;
+            border: 1px solid white;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            
+            overflow-y: auto;
+            animation: scaleIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #d63384;
+            font-size: 2.8rem;
+            margin-top: 0; margin-bottom: 25px;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
+        }
+
+        .speech {
+            line-height: 1.8;
+            color: #2d2d2d;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: left;
+            background: rgba(255,255,255,0.4);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .signature {
+            margin-top: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+            color: #d63384;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        /* --- ANIMATIONS --- */
+        .floating {
+            position: absolute; bottom: -50px;
+            pointer-events: none; z-index: 20;
+            animation: floatUp 6s linear forwards;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: translate(-50%, -45%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+        
+        /* Hide scrollbar */
+        #surprise-content::-webkit-scrollbar { width: 0px; background: transparent; }
+    </style>
+</head>
+<body>
+
+    <div id="main-bg"></div>
+
+    <div id="login-screen">
+        <div class="login-card" id="card">
+            <h2>For Gabriel</h2>
+            <p style="color: #666; font-size: 0.95rem; margin-bottom: 5px;">A secret space, just for you.</p>
+            
+            <input type="password" id="passInput" placeholder="Enter secret code..." autocomplete="off">
+            <br>
+            <button class="btn-main" onclick="unlock()">Open</button>
+            
+            <p id="error-msg" style="color: #d32f2f; font-size: 0.85rem; display: none; margin-top: 15px; font-weight: 500;">
+                Incorrect code. Hint: my
+            </p>
+        </div>
+    </div>
+
+    <div id="surprise-content">
+        <h1>Dearest Gabriel,</h1>
+        <div class="speech">
+            "Gabriel, everything about you feels ethereal, like a blessing I didn't know I deserved. You are so incredibly kind and full of a love that radiates from your very soul. When you speak, I’m captivated; when you show me affection, my heart races and finds peace all at once.
+            <br><br>
+            Every time our lips touch, it’s electric. It feels like the universe holds its breath just for us. In those intimate moments, I realize how incredibly lucky I am to call someone as loving, sweet, and magnificent as you mine. Your personality doesn't just shine; it dazzles. You make my life infinitely more beautiful just by breathing. I adore you."
+        </div>
+        <div class="signature">Forever Yours. ❤️</div>
+    </div>
+
+    <script>
+        // Set the new password here
+        const CODE = "my";
+
+        // Added functionality to allow pressing "Enter" to unlock
+        document.getElementById('passInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                unlock();
+            }
+        });
+
+        function unlock() {
+            const input = document.getElementById('passInput');
+            const errorMsg = document.getElementById('error-msg');
+            const card = document.getElementById('card');
+            const mainBg = document.getElementById('main-bg');
+
+            // Check against the new code
+            if(input.value.toLowerCase().trim() === CODE) {
+                // 1. Reveal Main Background
+                mainBg.style.opacity = '1';
+                
+                // 2. Hide Login
+                const loginScreen = document.getElementById('login-screen');
+                loginScreen.style.opacity = '0';
+                loginScreen.style.visibility = 'hidden';
+
+                // 3. Show Content
+                setTimeout(() => {
+                    document.getElementById('surprise-content').style.display = 'block';
+                    startHeartRain();
+                }, 800);
+            } else {
+                // Wrong Password
+                errorMsg.style.display = 'block';
+                input.value = ""; 
+                card.classList.remove("shake");
+                void card.offsetWidth; 
+                card.classList.add("shake");
+            }
+        }
+
+        function createEmoji(emoji) {
+            const el = document.createElement('div');
+            el.className = 'floating';
+            el.innerHTML = emoji;
+            // Randomize position and animation speed
+            el.style.left = Math.random() * 85 + 5 + "vw"; 
+            el.style.fontSize = (Math.random() * 20 + 20) + "px";
+            el.style.animationDuration = (Math.random() * 3 + 4) + "s";
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 6000);
+        }
+
+        function startHeartRain() {
+            const items = ['❤️', '🌹', '😘', '❤️', '✨', '💖'];
+            setInterval(() => {
+                const randomItem = items[Math.floor(Math.random() * items.length)];
+                createEmoji(randomItem);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
